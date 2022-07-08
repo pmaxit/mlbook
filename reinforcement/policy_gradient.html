@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Introduction &#8212; Data Science notebook</title>
+    <title>Policy Gradient &#8212; Data Science notebook</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,10 +50,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Markdown Files" href="../markdown.html" />
-    <link rel="prev" title="Welcome to your Jupyter Book" href="../intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -118,9 +118,9 @@ const thebe_selector_output = ".output, .cell_output"
   Tensorflow
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tensorflow/01_index.html">
    Introduction
   </a>
  </li>
@@ -197,35 +197,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/tensorflow/01_index.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -265,7 +236,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Ftensorflow/01_index.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Freinforcement/policy_gradient.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -293,7 +264,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/tensorflow/01_index.ipynb"
+        <a href="../_sources/reinforcement/policy_gradient.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -330,23 +301,130 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rewards">
+   Rewards
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dynamics">
+   Dynamics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#expectation-values">
+   Expectation values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discounting">
+   Discounting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#actor-critic-method">
+   Actor critic method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#temporal-difference-td-learning">
+   Temporal Difference (TD) learning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cost-of-the-critic">
+   Cost of the critic
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#policy-gradient-loss">
+   Policy Gradient loss
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Introduction</h1>
+                <h1>Policy Gradient</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rewards">
+   Rewards
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dynamics">
+   Dynamics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#expectation-values">
+   Expectation values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discounting">
+   Discounting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#actor-critic-method">
+   Actor critic method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#temporal-difference-td-learning">
+   Temporal Difference (TD) learning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cost-of-the-critic">
+   Cost of the critic
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#policy-gradient-loss">
+   Policy Gradient loss
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -354,9 +432,50 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
-<p>Tensorflow is a library from google for deep learning. It helps us to build deep learning models for multiple tasks.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="policy-gradient">
+<h1>Policy Gradient<a class="headerlink" href="#policy-gradient" title="Permalink to this headline">#</a></h1>
+<p>Policy is mapping from states to actions telling what action to take at each state.</p>
+<p>Policy can be probalistic and denoted by
+$<span class="math notranslate nohighlight">\(\pi\)</span>$</p>
+<section id="rewards">
+<h2>Rewards<a class="headerlink" href="#rewards" title="Permalink to this headline">#</a></h2>
+<p>Signal what is expected; design can be tricky</p>
+<p>if we give only one positive signal at the end then it won’t have any motivation to solve the problem quickly</p>
+</section>
+<section id="dynamics">
+<h2>Dynamics<a class="headerlink" href="#dynamics" title="Permalink to this headline">#</a></h2>
+<div class="math notranslate nohighlight">
+\[ P(s\prime, r | s, a) \]</div>
+<p>= probability of getting state  and reward r given state s and action a</p>
+<p>In general, we don’t know the value of this until we <code class="docutils literal notranslate"><span class="pre">interact</span></code> with the environment</p>
+</section>
+<section id="expectation-values">
+<h2>Expectation values<a class="headerlink" href="#expectation-values" title="Permalink to this headline">#</a></h2>
+<div class="math notranslate nohighlight">
+\[ E(s_t) = \sum(r_t) \sum(P(s_{t+1}, r | S_t, a))\]</div>
+</section>
+<section id="discounting">
+<h2>Discounting<a class="headerlink" href="#discounting" title="Permalink to this headline">#</a></h2>
+<div class="math notranslate nohighlight">
+\[G_t = R_t + \gamma * G_{t+1}\]</div>
+</section>
+<section id="actor-critic-method">
+<h2>Actor critic method<a class="headerlink" href="#actor-critic-method" title="Permalink to this headline">#</a></h2>
+<p>Actor approximates policy</p>
+<p>state is the input and output is the action</p>
+<p>Critic approximates how good the action is <span class="math notranslate nohighlight">\( V(s) \)</span></p>
+</section>
+<section id="temporal-difference-td-learning">
+<h2>Temporal Difference (TD) learning<a class="headerlink" href="#temporal-difference-td-learning" title="Permalink to this headline">#</a></h2>
+<p>Learn at each time step</p>
+</section>
+<section id="cost-of-the-critic">
+<h2>Cost of the critic<a class="headerlink" href="#cost-of-the-critic" title="Permalink to this headline">#</a></h2>
+<p>$$</p>
+</section>
+<section id="policy-gradient-loss">
+<h2>Policy Gradient loss<a class="headerlink" href="#policy-gradient-loss" title="Permalink to this headline">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -372,7 +491,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./tensorflow"
+            path: "./reinforcement"
         },
         predefinedOutput: true
     }
@@ -386,20 +505,6 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Welcome to your Jupyter Book</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="../markdown.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Markdown Files</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>

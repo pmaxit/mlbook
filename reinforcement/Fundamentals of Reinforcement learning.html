@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Introduction &#8212; Data Science notebook</title>
+    <title>Fundamentals &#8212; Data Science notebook</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Markdown Files" href="../markdown.html" />
-    <link rel="prev" title="Welcome to your Jupyter Book" href="../intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -118,9 +116,9 @@ const thebe_selector_output = ".output, .cell_output"
   Tensorflow
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tensorflow/01_index.html">
    Introduction
   </a>
  </li>
@@ -205,7 +203,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/tensorflow/01_index.ipynb"
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/reinforcement/Fundamentals of Reinforcement learning.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -265,7 +263,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Ftensorflow/01_index.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Freinforcement/Fundamentals of Reinforcement learning.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -293,7 +291,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/tensorflow/01_index.ipynb"
+        <a href="../_sources/reinforcement/Fundamentals of Reinforcement learning.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -330,23 +328,124 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#key-elements-in-rl">
+   Key elements in RL
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#agent">
+     Agent
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#environment">
+     Environment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#state-and-action">
+     State and action
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reward">
+     Reward
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-idea-of-rl">
+   Basic Idea of RL
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#difference-between-other-methods">
+   Difference between other methods
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Introduction</h1>
+                <h1>Fundamentals</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#key-elements-in-rl">
+   Key elements in RL
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#agent">
+     Agent
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#environment">
+     Environment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#state-and-action">
+     State and action
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reward">
+     Reward
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-idea-of-rl">
+   Basic Idea of RL
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#difference-between-other-methods">
+   Difference between other methods
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -354,9 +453,41 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
-<p>Tensorflow is a library from google for deep learning. It helps us to build deep learning models for multiple tasks.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="fundamentals">
+<h1>Fundamentals<a class="headerlink" href="#fundamentals" title="Permalink to this headline">#</a></h1>
+<p>Reinforcement learning is one of the areas of <strong>Machine Learning (ML)</strong>. Unline other ML paradigms, such as supervised, and unsupervised learning, RL works in a trial and error fashion by interacting with the environment</p>
+<p>In this chapter, we will build a strong foundation in RL by exploring several important and fundamental concepts involved in RL.</p>
+<section id="key-elements-in-rl">
+<h2>Key elements in RL<a class="headerlink" href="#key-elements-in-rl" title="Permalink to this headline">#</a></h2>
+<section id="agent">
+<h3>Agent<a class="headerlink" href="#agent" title="Permalink to this headline">#</a></h3>
+<p>An agent is a software program that learns to make intelligent decisions. We can say that an agent is a learner in RL setting. For instance, a chess player can be considered an agent since the player can be considered an agent.</p>
+</section>
+<section id="environment">
+<h3>Environment<a class="headerlink" href="#environment" title="Permalink to this headline">#</a></h3>
+<p>Environment is the world of the agent. The agent stays within the environment. For instance, coming back to the chess game, a chessboard is called an environment since the chess player ( agent) learns to play the game of chess within the chessboard (environment)</p>
+</section>
+<section id="state-and-action">
+<h3>State and action<a class="headerlink" href="#state-and-action" title="Permalink to this headline">#</a></h3>
+<p>A state is a position or moment in the environment that agent can be in. We learned that agent stays within the environment and there can be many positions in the environment. Those positions are called states.</p>
+<p>Agent interacts with the environment and moves from one state to another by performing an action. In the chess game environment, the action is the move performed by the player (agent).</p>
+</section>
+<section id="reward">
+<h3>Reward<a class="headerlink" href="#reward" title="Permalink to this headline">#</a></h3>
+<p>We learned that the agent interacts with an environment by performing an action and movces from one state to another. Based on the action, the agent recieves the award. A reward is nothing but a numerical value, say, +1 for a good action and -1 for a bad action.</p>
+</section>
+</section>
+<section id="basic-idea-of-rl">
+<h2>Basic Idea of RL<a class="headerlink" href="#basic-idea-of-rl" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>just like teaching a dog to catch a ball</p></li>
+<li><p>We throw a ball and every time dog catches, we give it a cookie</p></li>
+<li><p>dog will figure out the best action</p></li>
+</ul>
+</section>
+<section id="difference-between-other-methods">
+<h2>Difference between other methods<a class="headerlink" href="#difference-between-other-methods" title="Permalink to this headline">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -372,7 +503,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./tensorflow"
+            path: "./reinforcement"
         },
         predefinedOutput: true
     }
@@ -386,20 +517,6 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Welcome to your Jupyter Book</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="../markdown.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Markdown Files</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>

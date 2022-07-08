@@ -1,0 +1,115 @@
+Traceback (most recent call last):
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+py_replay_buffer = episodic_replay_buffer.EpisodicReplayBuffer(
+    capacity=2,
+    data_spec=data_spec,
+    completed_only=True)
+
+stateful_buffer = episodic_replay_buffer.StatefulEpisodicReplayBuffer(
+    py_replay_buffer,
+    num_episodes=2,
+)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mAttributeError[0m                            Traceback (most recent call last)
+Input [0;32mIn [12][0m, in [0;36m<cell line: 1>[0;34m()[0m
+[0;32m----> 1[0m py_replay_buffer [38;5;241m=[39m [43mepisodic_replay_buffer[49m[38;5;241;43m.[39;49m[43mEpisodicReplayBuffer[49m[43m([49m
+[1;32m      2[0m [43m    [49m[43mcapacity[49m[38;5;241;43m=[39;49m[38;5;241;43m2[39;49m[43m,[49m
+[1;32m      3[0m [43m    [49m[43mdata_spec[49m[38;5;241;43m=[39;49m[43mdata_spec[49m[43m,[49m
+[1;32m      4[0m [43m    [49m[43mcompleted_only[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m)[49m
+[1;32m      6[0m stateful_buffer [38;5;241m=[39m episodic_replay_buffer[38;5;241m.[39mStatefulEpisodicReplayBuffer(
+[1;32m      7[0m     py_replay_buffer,
+[1;32m      8[0m     num_episodes[38;5;241m=[39m[38;5;241m2[39m,
+[1;32m      9[0m )
+
+File [0;32m~/.local/lib/python3.9/site-packages/gin/config.py:1605[0m, in [0;36m_make_gin_wrapper.<locals>.gin_wrapper[0;34m(*args, **kwargs)[0m
+[1;32m   1603[0m scope_info [38;5;241m=[39m [38;5;124m"[39m[38;5;124m in scope [39m[38;5;124m'[39m[38;5;132;01m{}[39;00m[38;5;124m'[39m[38;5;124m"[39m[38;5;241m.[39mformat(scope_str) [38;5;28;01mif[39;00m scope_str [38;5;28;01melse[39;00m [38;5;124m'[39m[38;5;124m'[39m
+[1;32m   1604[0m err_str [38;5;241m=[39m err_str[38;5;241m.[39mformat(name, fn_or_cls, scope_info)
+[0;32m-> 1605[0m [43mutils[49m[38;5;241;43m.[39;49m[43maugment_exception_message_and_reraise[49m[43m([49m[43me[49m[43m,[49m[43m [49m[43merr_str[49m[43m)[49m
+
+File [0;32m~/.local/lib/python3.9/site-packages/gin/utils.py:41[0m, in [0;36maugment_exception_message_and_reraise[0;34m(exception, message)[0m
+[1;32m     39[0m proxy [38;5;241m=[39m ExceptionProxy()
+[1;32m     40[0m ExceptionProxy[38;5;241m.[39m[38;5;18m__qualname__[39m [38;5;241m=[39m [38;5;28mtype[39m(exception)[38;5;241m.[39m[38;5;18m__qualname__[39m
+[0;32m---> 41[0m [38;5;28;01mraise[39;00m proxy[38;5;241m.[39mwith_traceback(exception[38;5;241m.[39m__traceback__) [38;5;28;01mfrom[39;00m [38;5;28mNone[39m
+
+File [0;32m~/.local/lib/python3.9/site-packages/gin/config.py:1582[0m, in [0;36m_make_gin_wrapper.<locals>.gin_wrapper[0;34m(*args, **kwargs)[0m
+[1;32m   1579[0m new_kwargs[38;5;241m.[39mupdate(kwargs)
+[1;32m   1581[0m [38;5;28;01mtry[39;00m:
+[0;32m-> 1582[0m   [38;5;28;01mreturn[39;00m [43mfn[49m[43m([49m[38;5;241;43m*[39;49m[43mnew_args[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mnew_kwargs[49m[43m)[49m
+[1;32m   1583[0m [38;5;28;01mexcept[39;00m [38;5;167;01mException[39;00m [38;5;28;01mas[39;00m e:  [38;5;66;03m# pylint: disable=broad-except[39;00m
+[1;32m   1584[0m   err_str [38;5;241m=[39m [38;5;124m'[39m[38;5;124m'[39m
+
+File [0;32m~/.local/lib/python3.9/site-packages/tf_agents/replay_buffers/episodic_replay_buffer.py:234[0m, in [0;36mEpisodicReplayBuffer.__init__[0;34m(self, data_spec, capacity, completed_only, buffer_size, name_prefix, device, seed, begin_episode_fn, end_episode_fn, dataset_drop_remainder, dataset_window_shift)[0m
+[1;32m    231[0m [38;5;28mself[39m[38;5;241m.[39m_num_writes [38;5;241m=[39m common[38;5;241m.[39mcreate_variable([38;5;124m'[39m[38;5;124mnum_writes_counter[39m[38;5;124m'[39m)
+[1;32m    233[0m [38;5;28;01mwith[39;00m tf[38;5;241m.[39mdevice([38;5;28mself[39m[38;5;241m.[39m_device):
+[0;32m--> 234[0m   [38;5;28mself[39m[38;5;241m.[39m_data_table [38;5;241m=[39m [43mepisode_table_fn[49m[43m([49m
+[1;32m    235[0m [43m      [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_data_spec[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_capacity[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_name_prefix[49m[43m)[49m
+[1;32m    236[0m   [38;5;66;03m# The episode ids[39;00m
+[1;32m    237[0m   [38;5;28mself[39m[38;5;241m.[39m_id_table [38;5;241m=[39m table_fn([38;5;28mself[39m[38;5;241m.[39m_id_spec, [38;5;28mself[39m[38;5;241m.[39m_capacity)
+
+File [0;32m~/.local/lib/python3.9/site-packages/tf_agents/replay_buffers/episodic_table.py:82[0m, in [0;36mEpisodicTable.__init__[0;34m(self, tensor_spec, capacity, name_prefix)[0m
+[1;32m     73[0m [38;5;28;01mdef[39;00m [38;5;21m_create_storage[39m(spec, slot_name):
+[1;32m     74[0m   [38;5;28;01mreturn[39;00m tf[38;5;241m.[39mlookup[38;5;241m.[39mexperimental[38;5;241m.[39mDenseHashTable(
+[1;32m     75[0m       key_dtype[38;5;241m=[39mtf[38;5;241m.[39mint64,
+[1;32m     76[0m       value_dtype[38;5;241m=[39mtf[38;5;241m.[39mvariant,
+[0;32m   (...)[0m
+[1;32m     79[0m       name[38;5;241m=[39mslot_name,
+[1;32m     80[0m       default_value[38;5;241m=[39m_empty_slot(spec))
+[0;32m---> 82[0m [38;5;28mself[39m[38;5;241m.[39m_storage [38;5;241m=[39m [43mtf[49m[38;5;241;43m.[39;49m[43mnest[49m[38;5;241;43m.[39;49m[43mmap_structure[49m[43m([49m[43m_create_storage[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_tensor_spec[49m[43m,[49m
+[1;32m     83[0m [43m                                      [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_slots[49m[43m)[49m
+[1;32m     84[0m [38;5;28mself[39m[38;5;241m.[39m_variables [38;5;241m=[39m tf[38;5;241m.[39mnest[38;5;241m.[39mflatten([38;5;28mself[39m[38;5;241m.[39m_storage)
+[1;32m     85[0m [38;5;28mself[39m[38;5;241m.[39m_slot2variable_map [38;5;241m=[39m [38;5;28mdict[39m([38;5;28mzip[39m([38;5;28mself[39m[38;5;241m.[39m_flattened_slots, [38;5;28mself[39m[38;5;241m.[39m_variables))
+
+File [0;32m~/miniforge3/envs/meta/lib/python3.9/site-packages/tensorflow/python/util/nest.py:916[0m, in [0;36mmap_structure[0;34m(func, *structure, **kwargs)[0m
+[1;32m    912[0m flat_structure [38;5;241m=[39m (flatten(s, expand_composites) [38;5;28;01mfor[39;00m s [38;5;129;01min[39;00m structure)
+[1;32m    913[0m entries [38;5;241m=[39m [38;5;28mzip[39m([38;5;241m*[39mflat_structure)
+[1;32m    915[0m [38;5;28;01mreturn[39;00m pack_sequence_as(
+[0;32m--> 916[0m     structure[[38;5;241m0[39m], [func([38;5;241m*[39mx) [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m entries],
+[1;32m    917[0m     expand_composites[38;5;241m=[39mexpand_composites)
+
+File [0;32m~/miniforge3/envs/meta/lib/python3.9/site-packages/tensorflow/python/util/nest.py:916[0m, in [0;36m<listcomp>[0;34m(.0)[0m
+[1;32m    912[0m flat_structure [38;5;241m=[39m (flatten(s, expand_composites) [38;5;28;01mfor[39;00m s [38;5;129;01min[39;00m structure)
+[1;32m    913[0m entries [38;5;241m=[39m [38;5;28mzip[39m([38;5;241m*[39mflat_structure)
+[1;32m    915[0m [38;5;28;01mreturn[39;00m pack_sequence_as(
+[0;32m--> 916[0m     structure[[38;5;241m0[39m], [[43mfunc[49m[43m([49m[38;5;241;43m*[39;49m[43mx[49m[43m)[49m [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m entries],
+[1;32m    917[0m     expand_composites[38;5;241m=[39mexpand_composites)
+
+File [0;32m~/.local/lib/python3.9/site-packages/tf_agents/replay_buffers/episodic_table.py:80[0m, in [0;36mEpisodicTable.__init__.<locals>._create_storage[0;34m(spec, slot_name)[0m
+[1;32m     73[0m [38;5;28;01mdef[39;00m [38;5;21m_create_storage[39m(spec, slot_name):
+[1;32m     74[0m   [38;5;28;01mreturn[39;00m tf[38;5;241m.[39mlookup[38;5;241m.[39mexperimental[38;5;241m.[39mDenseHashTable(
+[1;32m     75[0m       key_dtype[38;5;241m=[39mtf[38;5;241m.[39mint64,
+[1;32m     76[0m       value_dtype[38;5;241m=[39mtf[38;5;241m.[39mvariant,
+[1;32m     77[0m       empty_key[38;5;241m=[39m[38;5;241m-[39m[38;5;241m1[39m,
+[1;32m     78[0m       deleted_key[38;5;241m=[39m[38;5;241m-[39m[38;5;241m2[39m,
+[1;32m     79[0m       name[38;5;241m=[39mslot_name,
+[0;32m---> 80[0m       default_value[38;5;241m=[39m[43m_empty_slot[49m[43m([49m[43mspec[49m[43m)[49m)
+
+File [0;32m~/.local/lib/python3.9/site-packages/tf_agents/replay_buffers/episodic_table.py:35[0m, in [0;36m_empty_slot[0;34m(spec)[0m
+[1;32m     34[0m [38;5;28;01mdef[39;00m [38;5;21m_empty_slot[39m(spec):
+[0;32m---> 35[0m   shape [38;5;241m=[39m [s [38;5;28;01mif[39;00m s [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m [38;5;28;01melse[39;00m [38;5;241m-[39m[38;5;241m1[39m [38;5;28;01mfor[39;00m s [38;5;129;01min[39;00m [43mspec[49m[38;5;241;43m.[39;49m[43mshape[49m[38;5;241;43m.[39;49m[43mas_list[49m()]
+[1;32m     36[0m   shape [38;5;241m=[39m tf[38;5;241m.[39mconvert_to_tensor(value[38;5;241m=[39mshape, dtype[38;5;241m=[39mtf[38;5;241m.[39mint64, name[38;5;241m=[39m[38;5;124m'[39m[38;5;124mshape[39m[38;5;124m'[39m)
+[1;32m     37[0m   [38;5;28;01mreturn[39;00m list_ops[38;5;241m.[39mempty_tensor_list(shape, spec[38;5;241m.[39mdtype)
+
+[0;31mAttributeError[0m: 'tuple' object has no attribute 'as_list'
+  In call to configurable 'EpisodicReplayBuffer' (<class 'tf_agents.replay_buffers.episodic_replay_buffer.EpisodicReplayBuffer'>)
+AttributeError: 'tuple' object has no attribute 'as_list'
+  In call to configurable 'EpisodicReplayBuffer' (<class 'tf_agents.replay_buffers.episodic_replay_buffer.EpisodicReplayBuffer'>)
+
