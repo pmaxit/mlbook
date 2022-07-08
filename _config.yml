@@ -1,14 +1,20 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: My sample book
-author: The Jupyter Book Community
+title: Data Science notebook
+author: Puneet Girdhar
 logo: logo.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: force
+  execute_notebooks: auto
+  cache: ""
+  exclude_patterns: []
+  timeout: 30
+  run_in_temp: false
+  allow_errors: false
+  stderr_output: show
 
 # Define the name of the latex output file for PDF builds
 latex:

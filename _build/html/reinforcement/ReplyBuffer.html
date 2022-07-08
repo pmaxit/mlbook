@@ -1,0 +1,1168 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Replay Buffer &#8212; Data Science notebook</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Science notebook</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tensorflow/01_index.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reinforcement learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown.html">
+   Introduction to Reinforcement
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks.html">
+   Example
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown-notebooks.html">
+   Notebooks with MyST Markdown
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/reinforcement/ReplyBuffer.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Freinforcement/ReplyBuffer.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/reinforcement/ReplyBuffer.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Replay Buffer
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#environment">
+   Environment
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#store-the-transitions">
+   Store the transitions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#replay-buffers">
+   Replay Buffers
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-collection">
+     Data Collection
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training">
+   Training
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Replay Buffer</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Replay Buffer
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#environment">
+   Environment
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#store-the-transitions">
+   Store the transitions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#replay-buffers">
+   Replay Buffers
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-collection">
+     Data Collection
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training">
+   Training
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="replay-buffer">
+<h1>Replay Buffer<a class="headerlink" href="#replay-buffer" title="Permalink to this headline">#</a></h1>
+<p>Replay Buffer to store trajectories of experience when executing a policy in an environment. During training, replay buffers are queried for a subset of the trajectories ( either a sequential subset or a sample ) to “replay” the agent’s exeprience</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">tf_agents</span> <span class="kn">import</span> <span class="n">specs</span>
+<span class="kn">from</span> <span class="nn">tf_agents.agents.dqn</span> <span class="kn">import</span> <span class="n">dqn_agent</span>
+<span class="kn">from</span> <span class="nn">tf_agents.drivers</span> <span class="kn">import</span> <span class="n">dynamic_step_driver</span>
+<span class="kn">from</span> <span class="nn">tf_agents.environments</span> <span class="kn">import</span> <span class="n">suite_gym</span>
+<span class="kn">from</span> <span class="nn">tf_agents.environments</span> <span class="kn">import</span> <span class="n">tf_py_environment</span>
+<span class="kn">from</span> <span class="nn">tf_agents.networks</span> <span class="kn">import</span> <span class="n">q_network</span>
+<span class="kn">from</span> <span class="nn">tf_agents.replay_buffers</span> <span class="kn">import</span> <span class="n">py_uniform_replay_buffer</span>
+<span class="kn">from</span> <span class="nn">tf_agents.replay_buffers</span> <span class="kn">import</span> <span class="n">tf_uniform_replay_buffer</span>
+<span class="kn">from</span> <span class="nn">tf_agents.specs</span> <span class="kn">import</span> <span class="n">tensor_spec</span>
+<span class="kn">from</span> <span class="nn">tf_agents.trajectories</span> <span class="kn">import</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">Trajectory</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="environment">
+<h1>Environment<a class="headerlink" href="#environment" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env_name</span> <span class="o">=</span> <span class="s2">&quot;CartPole-v0&quot;</span> <span class="c1"># @param {type:&quot;string&quot;}</span>
+<span class="n">num_iterations</span> <span class="o">=</span> <span class="mi">250</span> <span class="c1"># @param {type:&quot;integer&quot;}</span>
+<span class="n">collect_episodes_per_iteration</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># @param {type:&quot;integer&quot;}</span>
+<span class="n">replay_buffer_capacity</span> <span class="o">=</span> <span class="mi">2000</span> <span class="c1"># @param {type:&quot;integer&quot;}</span>
+
+<span class="n">fc_layer_params</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,)</span>
+
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-3</span> <span class="c1"># @param {type:&quot;number&quot;}</span>
+<span class="n">log_interval</span> <span class="o">=</span> <span class="mi">25</span> <span class="c1"># @param {type:&quot;integer&quot;}</span>
+<span class="n">num_eval_episodes</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># @param {type:&quot;integer&quot;}</span>
+<span class="n">eval_interval</span> <span class="o">=</span> <span class="mi">50</span> <span class="c1"># @param {type:&quot;integer&quot;}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_env</span> <span class="o">=</span> <span class="n">suite_gym</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">env_name</span><span class="p">)</span>
+<span class="n">eval_env</span> <span class="o">=</span> <span class="n">suite_gym</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">env_name</span><span class="p">)</span>
+
+<span class="n">train_tf_env</span> <span class="o">=</span> <span class="n">tf_py_environment</span><span class="o">.</span><span class="n">TFPyEnvironment</span><span class="p">(</span><span class="n">train_env</span><span class="p">)</span>
+<span class="n">eval_tf_env</span> <span class="o">=</span> <span class="n">tf_py_environment</span><span class="o">.</span><span class="n">TFPyEnvironment</span><span class="p">(</span><span class="n">eval_env</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It has two elements, <code class="docutils literal notranslate"><span class="pre">time_step_spec</span></code> and <code class="docutils literal notranslate"><span class="pre">action_spec</span></code>. These two will go to trajectory</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;action_spec:&#39;</span><span class="p">,</span> <span class="n">train_env</span><span class="o">.</span><span class="n">action_spec</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">train_env</span><span class="o">.</span><span class="n">time_step_spec</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>action_spec: BoundedArraySpec(shape=(), dtype=dtype(&#39;int64&#39;), name=&#39;action&#39;, minimum=0, maximum=1)
+TimeStep(
+{&#39;discount&#39;: BoundedArraySpec(shape=(), dtype=dtype(&#39;float32&#39;), name=&#39;discount&#39;, minimum=0.0, maximum=1.0),
+ &#39;observation&#39;: BoundedArraySpec(shape=(4,), dtype=dtype(&#39;float32&#39;), name=&#39;observation&#39;, minimum=[-4.8000002e+00 -3.4028235e+38 -4.1887903e-01 -3.4028235e+38], maximum=[4.8000002e+00 3.4028235e+38 4.1887903e-01 3.4028235e+38]),
+ &#39;reward&#39;: ArraySpec(shape=(), dtype=dtype(&#39;float32&#39;), name=&#39;reward&#39;),
+ &#39;step_type&#39;: ArraySpec(shape=(), dtype=dtype(&#39;int32&#39;), name=&#39;step_type&#39;)})
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that environment expects action of type <code class="docutils literal notranslate"><span class="pre">int64</span></code> and rturns <code class="docutils literal notranslate"><span class="pre">TimeSteps</span></code> where observation are a <code class="docutils literal notranslate"><span class="pre">float32</span></code> vector of length 4 and discount factor is <code class="docutils literal notranslate"><span class="pre">float32</span></code>. now let’s try to take a fixed action <code class="docutils literal notranslate"><span class="pre">(1,)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">action</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="n">time_step</span> <span class="o">=</span> <span class="n">train_env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">time_step</span><span class="p">)</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">time_step</span><span class="o">.</span><span class="n">is_last</span><span class="p">():</span>
+    <span class="n">time_step</span> <span class="o">=</span> <span class="n">train_env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">time_step</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TimeStep(
+{&#39;discount&#39;: array(1., dtype=float32),
+ &#39;observation&#39;: array([ 0.04045126, -0.03406752,  0.01079454,  0.00798312], dtype=float32),
+ &#39;reward&#39;: array(0., dtype=float32),
+ &#39;step_type&#39;: array(0, dtype=int32)})
+TimeStep(
+{&#39;discount&#39;: array(1., dtype=float32),
+ &#39;observation&#39;: array([ 0.03976991,  0.16089797,  0.0109542 , -0.28127456], dtype=float32),
+ &#39;reward&#39;: array(1., dtype=float32),
+ &#39;step_type&#39;: array(1, dtype=int32)})
+TimeStep(
+{&#39;discount&#39;: array(1., dtype=float32),
+ &#39;observation&#39;: array([ 0.04298786,  0.35586196,  0.00532871, -0.57048255], dtype=float32),
+ &#39;reward&#39;: array(1., dtype=float32),
+ &#39;step_type&#39;: array(1, dtype=int32)})
+TimeStep(
+{&#39;discount&#39;: array(1., dtype=float32),
+ &#39;observation&#39;: array([ 0.05010511,  0.5509088 , -0.00608094, -0.86148196], dtype=float32),
+ &#39;reward&#39;: array(1., dtype=float32),
+ &#39;step_type&#39;: array(1, dtype=int32)})
+TimeStep(
+{&#39;discount&#39;: array(1., dtype=float32),
+ &#39;observation&#39;: array([ 0.06112328,  0.746113  , -0.02331058, -1.1560707 ], dtype=float32),
+ &#39;reward&#39;: array(1., dtype=float32),
+ &#39;step_type&#39;: array(1, dtype=int32)})
+TimeStep(
+{&#39;discount&#39;: array(1., dtype=float32),
+ &#39;observation&#39;: array([ 0.07604554,  0.941531  , -0.04643199, -1.4559706 ], dtype=float32),
+ &#39;reward&#39;: array(1., dtype=float32),
+ &#39;step_type&#39;: array(1, dtype=int32)})
+TimeStep(
+{&#39;discount&#39;: array(1., dtype=float32),
+ &#39;observation&#39;: array([ 0.09487616,  1.137191  , -0.07555141, -1.7627906 ], dtype=float32),
+ &#39;reward&#39;: array(1., dtype=float32),
+ &#39;step_type&#39;: array(1, dtype=int32)})
+TimeStep(
+{&#39;discount&#39;: array(1., dtype=float32),
+ &#39;observation&#39;: array([ 0.11761998,  1.333082  , -0.11080722, -2.0779796 ], dtype=float32),
+ &#39;reward&#39;: array(1., dtype=float32),
+ &#39;step_type&#39;: array(1, dtype=int32)})
+TimeStep(
+{&#39;discount&#39;: array(1., dtype=float32),
+ &#39;observation&#39;: array([ 0.14428163,  1.5291388 , -0.1523668 , -2.402772  ], dtype=float32),
+ &#39;reward&#39;: array(1., dtype=float32),
+ &#39;step_type&#39;: array(1, dtype=int32)})
+TimeStep(
+{&#39;discount&#39;: array(1., dtype=float32),
+ &#39;observation&#39;: array([ 0.1748644 ,  1.7252268 , -0.20042224, -2.7381191 ], dtype=float32),
+ &#39;reward&#39;: array(1., dtype=float32),
+ &#39;step_type&#39;: array(1, dtype=int32)})
+TimeStep(
+{&#39;discount&#39;: array(0., dtype=float32),
+ &#39;observation&#39;: array([ 0.20936893,  1.9211224 , -0.25518462, -3.0846112 ], dtype=float32),
+ &#39;reward&#39;: array(1., dtype=float32),
+ &#39;step_type&#39;: array(2, dtype=int32)})
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="store-the-transitions">
+<h1>Store the transitions<a class="headerlink" href="#store-the-transitions" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_step</span> <span class="o">=</span> <span class="n">train_env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="n">rewards</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">num_episodes</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_episodes</span><span class="p">):</span>
+    <span class="n">episode_reward</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">episode_steps</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">time_step</span><span class="o">.</span><span class="n">is_last</span><span class="p">():</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">time_step</span> <span class="o">=</span> <span class="n">train_env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+        <span class="n">episode_steps</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">episode_reward</span> <span class="o">+=</span> <span class="n">time_step</span><span class="o">.</span><span class="n">reward</span>
+        
+    <span class="n">rewards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">episode_reward</span><span class="p">)</span>
+    <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">episode_steps</span><span class="p">)</span>
+    <span class="n">time_step</span> <span class="o">=</span> <span class="n">train_env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    
+<span class="n">num_steps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+<span class="n">avg_length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+<span class="n">avg_reward</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rewards</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;num_episodes:&#39;</span><span class="p">,</span> <span class="n">num_episodes</span><span class="p">,</span> <span class="s1">&#39;num_steps:&#39;</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;avg_length&#39;</span><span class="p">,</span> <span class="n">avg_length</span><span class="p">,</span> <span class="s1">&#39;avg_reward:&#39;</span><span class="p">,</span> <span class="n">avg_reward</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>num_episodes: 5 num_steps: 184
+avg_length 36.8 avg_reward: 36.8
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="replay-buffers">
+<h1>Replay Buffers<a class="headerlink" href="#replay-buffers" title="Permalink to this headline">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">PyUniformReplayBuffers</span></code> can be used to store the episodes and convert to batch.</p>
+<p>For most agents, <code class="docutils literal notranslate"><span class="pre">collect_data_spec</span></code> is a named tuple called <code class="docutils literal notranslate"><span class="pre">Trajectory</span></code>, containing the specs for observations, actions, rewards, and other items.”””</p>
+<p>agent.collect_data_spec</p>
+<p>agent.collect_data_spec._fields</p>
+<section id="data-collection">
+<h2>Data Collection<a class="headerlink" href="#data-collection" title="Permalink to this headline">#</a></h2>
+<p>The most important method is action(time_step) which maps a time_step containing an observation from the environment to a PolicyStep named tuple containing the following attributes:</p>
+<ul class="simple">
+<li><p>action: The action to be applied to the environment.</p></li>
+<li><p>state: The state of the policy (e.g. RNN state) to be fed into the next call to action.</p></li>
+<li><p>info: Optional side information such as action log probabilities.</p></li>
+</ul>
+<p>Environment provides two spec</p>
+<ul class="simple">
+<li><p>env.time_step_spec()</p></li>
+<li><p>env.action_spec()</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">replay_buffer_capacity</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">*</span><span class="mi">32</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tf_agents.agents</span> <span class="kn">import</span> <span class="n">data_converter</span>
+<span class="kn">from</span> <span class="nn">tf_agents.specs</span> <span class="kn">import</span> <span class="n">tensor_spec</span>
+<span class="kn">from</span> <span class="nn">tf_agents.trajectories</span> <span class="kn">import</span> <span class="n">time_step</span> <span class="k">as</span> <span class="n">ts</span>
+<span class="kn">from</span> <span class="nn">tf_agents.trajectories</span> <span class="kn">import</span> <span class="n">trajectory</span>
+<span class="kn">from</span> <span class="nn">tf_agents.utils</span> <span class="kn">import</span> <span class="n">test_utils</span>
+<span class="kn">from</span> <span class="nn">tf_agents.trajectories</span> <span class="kn">import</span> <span class="n">policy_step</span>
+<span class="kn">from</span> <span class="nn">tf_agents.specs</span> <span class="kn">import</span> <span class="n">array_spec</span>
+<span class="kn">from</span> <span class="nn">tf_agents.utils</span> <span class="kn">import</span> <span class="n">nest_utils</span>
+
+<span class="kn">from</span> <span class="nn">tf_agents.drivers</span> <span class="kn">import</span> <span class="n">py_driver</span>
+<span class="kn">from</span> <span class="nn">tf_agents.policies</span> <span class="kn">import</span> <span class="n">py_tf_eager_policy</span>
+<span class="kn">from</span> <span class="nn">tf_agents.replay_buffers</span> <span class="kn">import</span> <span class="n">episodic_replay_buffer</span>
+
+<span class="kn">from</span> <span class="nn">tf_agents.drivers</span> <span class="kn">import</span> <span class="n">dynamic_episode_driver</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_step_spec</span> <span class="o">=</span> <span class="n">train_env</span><span class="o">.</span><span class="n">time_step_spec</span><span class="p">()</span>
+<span class="n">action_spec</span> <span class="o">=</span> <span class="n">policy_step</span><span class="o">.</span><span class="n">PolicyStep</span><span class="p">(</span><span class="n">train_env</span><span class="o">.</span><span class="n">action_spec</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_spec</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">from_transition</span><span class="p">(</span><span class="n">time_step_spec</span><span class="p">,</span> <span class="n">action_spec</span><span class="p">,</span> <span class="n">time_step_spec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">py_replay_buffer</span> <span class="o">=</span> <span class="n">episodic_replay_buffer</span><span class="o">.</span><span class="n">EpisodicReplayBuffer</span><span class="p">(</span>
+    <span class="n">capacity</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">data_spec</span><span class="o">=</span><span class="n">data_spec</span><span class="p">,</span>
+    <span class="n">completed_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">stateful_buffer</span> <span class="o">=</span> <span class="n">episodic_replay_buffer</span><span class="o">.</span><span class="n">StatefulEpisodicReplayBuffer</span><span class="p">(</span>
+    <span class="n">py_replay_buffer</span><span class="p">,</span>
+    <span class="n">num_episodes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Metal device set to: Apple M1 Pro
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-06-25 13:56:22.967318: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:305] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
+2022-06-25 13:56:22.967635: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:271] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -&gt; physical PluggableDevice (device: 0, name: METAL, pci bus id: &lt;undefined&gt;)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+Input In [12], in &lt;cell line: 1&gt;()
+----&gt; 1 py_replay_buffer = episodic_replay_buffer.EpisodicReplayBuffer(
+      2     capacity=2,
+      3     data_spec=data_spec,
+      4     completed_only=True)
+      6 stateful_buffer = episodic_replay_buffer.StatefulEpisodicReplayBuffer(
+      7     py_replay_buffer,
+      8     num_episodes=2,
+      9 )
+
+File ~/.local/lib/python3.9/site-packages/gin/config.py:1605, in _make_gin_wrapper.&lt;locals&gt;.gin_wrapper(*args, **kwargs)
+   1603 scope_info = &quot; in scope &#39;{}&#39;&quot;.format(scope_str) if scope_str else &#39;&#39;
+   1604 err_str = err_str.format(name, fn_or_cls, scope_info)
+-&gt; 1605 utils.augment_exception_message_and_reraise(e, err_str)
+
+File ~/.local/lib/python3.9/site-packages/gin/utils.py:41, in augment_exception_message_and_reraise(exception, message)
+     39 proxy = ExceptionProxy()
+     40 ExceptionProxy.__qualname__ = type(exception).__qualname__
+---&gt; 41 raise proxy.with_traceback(exception.__traceback__) from None
+
+File ~/.local/lib/python3.9/site-packages/gin/config.py:1582, in _make_gin_wrapper.&lt;locals&gt;.gin_wrapper(*args, **kwargs)
+   1579 new_kwargs.update(kwargs)
+   1581 try:
+-&gt; 1582   return fn(*new_args, **new_kwargs)
+   1583 except Exception as e:  # pylint: disable=broad-except
+   1584   err_str = &#39;&#39;
+
+File ~/.local/lib/python3.9/site-packages/tf_agents/replay_buffers/episodic_replay_buffer.py:234, in EpisodicReplayBuffer.__init__(self, data_spec, capacity, completed_only, buffer_size, name_prefix, device, seed, begin_episode_fn, end_episode_fn, dataset_drop_remainder, dataset_window_shift)
+    231 self._num_writes = common.create_variable(&#39;num_writes_counter&#39;)
+    233 with tf.device(self._device):
+--&gt; 234   self._data_table = episode_table_fn(
+    235       self._data_spec, self._capacity, self._name_prefix)
+    236   # The episode ids
+    237   self._id_table = table_fn(self._id_spec, self._capacity)
+
+File ~/.local/lib/python3.9/site-packages/tf_agents/replay_buffers/episodic_table.py:82, in EpisodicTable.__init__(self, tensor_spec, capacity, name_prefix)
+     73 def _create_storage(spec, slot_name):
+     74   return tf.lookup.experimental.DenseHashTable(
+     75       key_dtype=tf.int64,
+     76       value_dtype=tf.variant,
+   (...)
+     79       name=slot_name,
+     80       default_value=_empty_slot(spec))
+---&gt; 82 self._storage = tf.nest.map_structure(_create_storage, self._tensor_spec,
+     83                                       self._slots)
+     84 self._variables = tf.nest.flatten(self._storage)
+     85 self._slot2variable_map = dict(zip(self._flattened_slots, self._variables))
+
+File ~/miniforge3/envs/meta/lib/python3.9/site-packages/tensorflow/python/util/nest.py:916, in map_structure(func, *structure, **kwargs)
+    912 flat_structure = (flatten(s, expand_composites) for s in structure)
+    913 entries = zip(*flat_structure)
+    915 return pack_sequence_as(
+--&gt; 916     structure[0], [func(*x) for x in entries],
+    917     expand_composites=expand_composites)
+
+File ~/miniforge3/envs/meta/lib/python3.9/site-packages/tensorflow/python/util/nest.py:916, in &lt;listcomp&gt;(.0)
+    912 flat_structure = (flatten(s, expand_composites) for s in structure)
+    913 entries = zip(*flat_structure)
+    915 return pack_sequence_as(
+--&gt; 916     structure[0], [func(*x) for x in entries],
+    917     expand_composites=expand_composites)
+
+File ~/.local/lib/python3.9/site-packages/tf_agents/replay_buffers/episodic_table.py:80, in EpisodicTable.__init__.&lt;locals&gt;._create_storage(spec, slot_name)
+     73 def _create_storage(spec, slot_name):
+     74   return tf.lookup.experimental.DenseHashTable(
+     75       key_dtype=tf.int64,
+     76       value_dtype=tf.variant,
+     77       empty_key=-1,
+     78       deleted_key=-2,
+     79       name=slot_name,
+---&gt; 80       default_value=_empty_slot(spec))
+
+File ~/.local/lib/python3.9/site-packages/tf_agents/replay_buffers/episodic_table.py:35, in _empty_slot(spec)
+     34 def _empty_slot(spec):
+---&gt; 35   shape = [s if s is not None else -1 for s in spec.shape.as_list()]
+     36   shape = tf.convert_to_tensor(value=shape, dtype=tf.int64, name=&#39;shape&#39;)
+     37   return list_ops.empty_tensor_list(shape, spec.dtype)
+
+AttributeError: &#39;tuple&#39; object has no attribute &#39;as_list&#39;
+  In call to configurable &#39;EpisodicReplayBuffer&#39; (&lt;class &#39;tf_agents.replay_buffers.episodic_replay_buffer.EpisodicReplayBuffer&#39;&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">collect_step</span><span class="p">(</span><span class="n">environment</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">policy_state</span><span class="p">):</span>
+  <span class="n">time_step</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">current_time_step</span><span class="p">()</span>
+  <span class="k">if</span> <span class="n">policy_state</span><span class="p">:</span>
+      <span class="n">action_step</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">action</span><span class="p">(</span><span class="n">time_step</span><span class="p">,</span> <span class="n">policy_state</span><span class="p">)</span>
+      <span class="n">policy_state</span> <span class="o">=</span> <span class="n">action_step</span><span class="o">.</span><span class="n">state</span>
+  <span class="k">else</span><span class="p">:</span>
+      <span class="n">action_step</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">action</span><span class="p">(</span><span class="n">time_step</span><span class="p">)</span>
+
+  <span class="n">next_time_step</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action_step</span><span class="o">.</span><span class="n">action</span><span class="p">)</span>
+  <span class="n">traj</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">from_transition</span><span class="p">(</span><span class="n">time_step</span><span class="p">,</span> <span class="n">action_step</span><span class="p">,</span> <span class="n">next_time_step</span><span class="p">)</span>
+
+  <span class="n">id_tensor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+  <span class="n">buffer</span><span class="o">.</span><span class="n">add_batch</span><span class="p">(</span><span class="n">traj</span><span class="p">,</span> <span class="n">id_tensor</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">time_step</span><span class="o">.</span><span class="n">is_last</span><span class="p">():</span>
+      <span class="nb">id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+  <span class="k">return</span> <span class="n">policy_state</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">collect_data</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">policy_state</span><span class="o">=</span><span class="p">()):</span>
+  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+    <span class="n">policy_state</span> <span class="o">=</span> <span class="n">collect_step</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">policy_state</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">policy_state</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">episode_id</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">collect_data</span><span class="p">(</span><span class="n">train_env</span><span class="p">,</span> <span class="n">random_policy</span><span class="p">,</span> <span class="n">py_replay_buffer</span><span class="p">,</span> <span class="mi">2</span> <span class="p">,</span> <span class="n">episode_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">collect_episode</span><span class="p">(</span><span class="n">environment</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">num_episodes</span><span class="p">):</span>
+
+  <span class="n">driver</span> <span class="o">=</span> <span class="n">py_driver</span><span class="o">.</span><span class="n">PyDriver</span><span class="p">(</span>
+    <span class="n">environment</span><span class="p">,</span>
+    <span class="n">py_tf_eager_policy</span><span class="o">.</span><span class="n">PyTFEagerPolicy</span><span class="p">(</span>
+      <span class="n">policy</span><span class="p">,</span> <span class="n">use_tf_function</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="p">[</span><span class="n">py_replay_buffer</span><span class="o">.</span><span class="n">add_batch</span><span class="p">],</span>
+    <span class="n">max_episodes</span><span class="o">=</span><span class="n">num_episodes</span><span class="p">)</span>
+  <span class="n">initial_time_step</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+  <span class="n">driver</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">initial_time_step</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collect_episode</span><span class="p">(</span><span class="n">train_env</span><span class="p">,</span> <span class="n">tf_agent</span><span class="o">.</span><span class="n">collect_policy</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">collect_episode</span><span class="p">(</span><span class="n">environment</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">buffer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">observers</span> <span class="o">=</span> <span class="p">[</span><span class="n">buffer</span><span class="o">.</span><span class="n">add_batch</span><span class="p">]</span>
+    
+    <span class="n">driver</span> <span class="o">=</span> <span class="n">dynamic_episode_driver</span><span class="o">.</span><span class="n">DynamicEpisodeDriver</span><span class="p">(</span>
+            <span class="n">environment</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">observers</span><span class="p">,</span><span class="n">num_episodes</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
+    
+    <span class="n">final_time_step</span><span class="p">,</span> <span class="n">policy_state</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@test {&quot;skip&quot;: true}</span>
+<span class="k">def</span> <span class="nf">collect_step</span><span class="p">(</span><span class="n">environment</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">buffer</span><span class="p">):</span>
+  <span class="n">time_step</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">current_time_step</span><span class="p">()</span>
+  <span class="n">action_step</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">action</span><span class="p">(</span><span class="n">time_step</span><span class="p">)</span>
+  <span class="n">next_time_step</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action_step</span><span class="o">.</span><span class="n">action</span><span class="p">)</span>
+  <span class="n">traj</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">from_transition</span><span class="p">(</span><span class="n">time_step</span><span class="p">,</span> <span class="n">action_step</span><span class="p">,</span> <span class="n">next_time_step</span><span class="p">)</span>
+
+  <span class="c1">#print(traj)</span>
+  <span class="c1"># Add trajectory to the replay buffer</span>
+  <span class="n">buffer</span><span class="o">.</span><span class="n">add_batch</span><span class="p">(</span><span class="n">nest_utils</span><span class="o">.</span><span class="n">batch_nested_array</span><span class="p">(</span><span class="n">traj</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tf_agents.policies</span> <span class="kn">import</span> <span class="n">random_py_policy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_policy</span> <span class="o">=</span> <span class="n">random_py_policy</span><span class="o">.</span><span class="n">RandomPyPolicy</span><span class="p">(</span><span class="n">train_env</span><span class="o">.</span><span class="n">time_step_spec</span><span class="p">(),</span>
+                                                <span class="n">train_env</span><span class="o">.</span><span class="n">action_spec</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">collect_data</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">steps</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+    <span class="n">collect_step</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
+
+<span class="n">collect_data</span><span class="p">(</span><span class="n">train_env</span><span class="p">,</span> <span class="n">random_policy</span><span class="p">,</span> <span class="n">py_replay_buffer</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collect_episode</span><span class="p">(</span><span class="n">train_tf_env</span><span class="p">,</span> <span class="n">random_policy</span><span class="p">,</span> <span class="n">py_replay_buffer</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">py_replay_buffer</span><span class="o">.</span><span class="n">as_dataset</span><span class="p">(</span>
+    <span class="n">sample_batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+    <span class="n">num_steps</span><span class="o">=</span><span class="n">n_step_update</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">iterator</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="training">
+<h1>Training<a class="headerlink" href="#training" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_avg_return</span><span class="p">(</span><span class="n">environment</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">num_episodes</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">total_return</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_episodes</span><span class="p">):</span>
+        <span class="n">time_step</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="n">episode_return</span> <span class="o">=</span> <span class="mf">0.0</span>
+        
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">time_step</span><span class="o">.</span><span class="n">is_last</span><span class="p">():</span>
+            <span class="n">action_step</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">action</span><span class="p">(</span><span class="n">time_step</span><span class="p">)</span>
+            <span class="n">time_step</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action_step</span><span class="o">.</span><span class="n">action</span><span class="p">)</span>
+            <span class="n">episode_return</span> <span class="o">+=</span> <span class="n">time_step</span><span class="o">.</span><span class="n">reward</span>
+            
+        <span class="n">total_return</span> <span class="o">+=</span> <span class="n">episode_return</span>
+        
+    <span class="n">avg_return</span> <span class="o">=</span> <span class="n">total_return</span> <span class="o">/</span> <span class="n">num_episodes</span>
+    <span class="k">return</span> <span class="n">avg_return</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_tf_env</span> <span class="o">=</span> <span class="n">tf_py_environment</span><span class="o">.</span><span class="n">TFPyEnvironment</span><span class="p">(</span><span class="n">train_env</span><span class="p">)</span>
+<span class="n">eval_tf_env</span> <span class="o">=</span> <span class="n">tf_py_environment</span><span class="o">.</span><span class="n">TFPyEnvironment</span><span class="p">(</span><span class="n">eval_env</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tf_agents.networks</span> <span class="kn">import</span> <span class="n">actor_distribution_network</span>
+<span class="kn">from</span> <span class="nn">tf_agents.policies</span> <span class="kn">import</span> <span class="n">py_tf_eager_policy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fc_layer_params</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">actor_net</span> <span class="o">=</span> <span class="n">actor_distribution_network</span><span class="o">.</span><span class="n">ActorDistributionNetwork</span><span class="p">(</span>
+    <span class="n">train_tf_env</span><span class="o">.</span><span class="n">observation_spec</span><span class="p">(),</span>
+    <span class="n">train_tf_env</span><span class="o">.</span><span class="n">action_spec</span><span class="p">(),</span>
+    <span class="n">fc_layer_params</span><span class="o">=</span><span class="n">fc_layer_params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tf_agents.agents.reinforce</span> <span class="kn">import</span> <span class="n">reinforce_agent</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">compat</span><span class="o">.</span><span class="n">v1</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+
+<span class="n">train_step_counter</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">tf_agent</span> <span class="o">=</span> <span class="n">reinforce_agent</span><span class="o">.</span><span class="n">ReinforceAgent</span><span class="p">(</span>
+    <span class="n">train_env</span><span class="o">.</span><span class="n">time_step_spec</span><span class="p">(),</span>
+    <span class="n">train_env</span><span class="o">.</span><span class="n">action_spec</span><span class="p">(),</span>
+    <span class="n">actor_network</span><span class="o">=</span><span class="n">actor_net</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+    <span class="n">normalize_returns</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">train_step_counter</span><span class="o">=</span><span class="n">train_step_counter</span><span class="p">)</span>
+<span class="n">tf_agent</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tf_agent</span><span class="o">.</span><span class="n">train_step_counter</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avg_return</span> <span class="o">=</span> <span class="n">compute_avg_return</span><span class="p">(</span><span class="n">eval_tf_env</span><span class="p">,</span> <span class="n">tf_agent</span><span class="o">.</span><span class="n">policy</span><span class="p">,</span> <span class="n">num_eval_episodes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns</span> <span class="o">=</span> <span class="p">[</span><span class="n">avg_return</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collect_episode</span><span class="p">(</span><span class="n">train_tf_env</span><span class="p">,</span> <span class="n">tf_agent</span><span class="o">.</span><span class="n">collect_policy</span><span class="p">,</span> <span class="n">py_replay_buffer</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    
+<span class="n">iterator</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">py_replay_buffer</span><span class="o">.</span><span class="n">as_dataset</span><span class="p">(</span><span class="n">sample_batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">trajectories</span>  <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">trajectories</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">py_replay_buffer</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_iterations</span><span class="p">):</span>
+    <span class="c1"># collect few episodes using collect_policy and save to replay buffer</span>
+    <span class="n">collect_episode</span><span class="p">(</span><span class="n">train_tf_env</span><span class="p">,</span> <span class="n">tf_agent</span><span class="o">.</span><span class="n">collect_policy</span><span class="p">,</span> <span class="n">py_replay_buffer</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">iterator</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">py_replay_buffer</span><span class="o">.</span><span class="n">as_dataset</span><span class="p">(</span><span class="n">sample_batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">trajectories</span>  <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">trajectories</span><span class="p">)</span>
+    <span class="n">batched_exp</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nest</span><span class="o">.</span><span class="n">map_structure</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">trajectories</span>
+    <span class="p">)</span>
+    
+    <span class="n">train_loss</span> <span class="o">=</span> <span class="n">tf_agent</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">batched_exp</span><span class="p">)</span><span class="o">.</span><span class="n">loss</span>
+    
+    <span class="n">py_replay_buffer</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    
+    <span class="n">step</span> <span class="o">=</span> <span class="n">tf_agent</span><span class="o">.</span><span class="n">train_step_counter</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">log_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;step == </span><span class="si">{0}</span><span class="s1">: loss = </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">train_loss</span><span class="o">.</span><span class="n">loss</span><span class="p">))</span>
+        
+    <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">eval_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">avg_return</span> <span class="o">=</span> <span class="n">compute_avg_return</span><span class="p">(</span><span class="n">eval_tf_env</span><span class="p">,</span> <span class="n">tf_agent</span><span class="o">.</span><span class="n">policy</span><span class="p">,</span> <span class="n">num_eval_episodes</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;step = </span><span class="si">{0}</span><span class="s1">: Average return = </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">avg_return</span><span class="p">))</span>
+        
+        <span class="n">returns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">avg_return</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">steps</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_iterations</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">eval_interval</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">returns</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Average Return&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Step&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mi">250</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./reinforcement"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Puneet Girdhar<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

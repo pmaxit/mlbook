@@ -1,0 +1,39 @@
+Anatomy of a jupyter notebook
+-----------------------------
+
+1. Content files
+intro.md
+markdown.md
+notebooks.ipynb
+
+
+Table of content
+_toc.yml
+
+Table of contents define the structure and types of your outputs
+Books are broken up into chapters and sections, with pointers to files
+
+```
+format: jb-book
+root: intro
+chapters:
+ - file: markdown
+ - file: notebooks
+
+```
+Root is the landing page
+
+
+
+Configuration
+_config.yml
+
+Book configuration controls how your book is built, metadata about the book
+and turns on/off various features
+
+Markdown
+--------
+Jupyter book supports two markdown 
+- CommonMark ( a basic markdown )
+- MyST ( a superset of common mark with more rich features )
+

@@ -3,7 +3,19 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+parts:
+- caption: Tensorflow
+  chapters:
+  - file: tensorflow/01_index
+- caption: Reinforcement learning
+  chapters:
+  - file: markdown
+    title: Introduction to Reinforcement
+  - file: notebooks
+    title: Example
+  - file: markdown-notebooks
+  
+- caption: Kaggle
+  chapters:
+  - file: markdown
+    title: Disaster classification
