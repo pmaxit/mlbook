@@ -1,0 +1,97 @@
+Traceback (most recent call last):
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/puneetg/miniforge3/envs/meta/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+args = TrainingArguments('outputs', learning_rate=lr, warmup_ratio=0.1, lr_scheduler_type='cosine', fp16=True,
+    evaluation_strategy="epoch", per_device_train_batch_size=bs, per_device_eval_batch_size=bs*2,
+    num_train_epochs=epochs, weight_decay=wd, report_to='none')
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mAttributeError[0m                            Traceback (most recent call last)
+Input [0;32mIn [21][0m, in [0;36m<cell line: 1>[0;34m()[0m
+[0;32m----> 1[0m args [38;5;241m=[39m [43mTrainingArguments[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43moutputs[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mlearning_rate[49m[38;5;241;43m=[39;49m[43mlr[49m[43m,[49m[43m [49m[43mwarmup_ratio[49m[38;5;241;43m=[39;49m[38;5;241;43m0.1[39;49m[43m,[49m[43m [49m[43mlr_scheduler_type[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mcosine[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mfp16[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m
+[1;32m      2[0m [43m    [49m[43mevaluation_strategy[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mepoch[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mper_device_train_batch_size[49m[38;5;241;43m=[39;49m[43mbs[49m[43m,[49m[43m [49m[43mper_device_eval_batch_size[49m[38;5;241;43m=[39;49m[43mbs[49m[38;5;241;43m*[39;49m[38;5;241;43m2[39;49m[43m,[49m
+[1;32m      3[0m [43m    [49m[43mnum_train_epochs[49m[38;5;241;43m=[39;49m[43mepochs[49m[43m,[49m[43m [49m[43mweight_decay[49m[38;5;241;43m=[39;49m[43mwd[49m[43m,[49m[43m [49m[43mreport_to[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mnone[39;49m[38;5;124;43m'[39;49m[43m)[49m
+
+File [0;32m<string>:93[0m, in [0;36m__init__[0;34m(self, output_dir, overwrite_output_dir, do_train, do_eval, do_predict, evaluation_strategy, prediction_loss_only, per_device_train_batch_size, per_device_eval_batch_size, per_gpu_train_batch_size, per_gpu_eval_batch_size, gradient_accumulation_steps, eval_accumulation_steps, eval_delay, learning_rate, weight_decay, adam_beta1, adam_beta2, adam_epsilon, max_grad_norm, num_train_epochs, max_steps, lr_scheduler_type, warmup_ratio, warmup_steps, log_level, log_level_replica, log_on_each_node, logging_dir, logging_strategy, logging_first_step, logging_steps, logging_nan_inf_filter, save_strategy, save_steps, save_total_limit, save_on_each_node, no_cuda, seed, data_seed, bf16, fp16, fp16_opt_level, half_precision_backend, bf16_full_eval, fp16_full_eval, tf32, local_rank, xpu_backend, tpu_num_cores, tpu_metrics_debug, debug, dataloader_drop_last, eval_steps, dataloader_num_workers, past_index, run_name, disable_tqdm, remove_unused_columns, label_names, load_best_model_at_end, metric_for_best_model, greater_is_better, ignore_data_skip, sharded_ddp, deepspeed, label_smoothing_factor, optim, adafactor, group_by_length, length_column_name, report_to, ddp_find_unused_parameters, ddp_bucket_cap_mb, dataloader_pin_memory, skip_memory_metrics, use_legacy_prediction_loop, push_to_hub, resume_from_checkpoint, hub_model_id, hub_strategy, hub_token, hub_private_repo, gradient_checkpointing, include_inputs_for_metrics, fp16_backend, push_to_hub_model_id, push_to_hub_organization, push_to_hub_token, mp_parameters)[0m
+
+File [0;32m~/miniforge3/envs/meta/lib/python3.9/site-packages/transformers/training_args.py:876[0m, in [0;36mTrainingArguments.__post_init__[0;34m(self)[0m
+[1;32m    868[0m     warnings[38;5;241m.[39mwarn(
+[1;32m    869[0m         [38;5;124m"[39m[38;5;124m`--adafactor` is deprecated and will be removed in version 5 of 🤗 Transformers. Use `--optim adafactor` instead[39m[38;5;124m"[39m,
+[1;32m    870[0m         [38;5;167;01mFutureWarning[39;00m,
+[1;32m    871[0m     )
+[1;32m    872[0m     [38;5;28mself[39m[38;5;241m.[39moptim [38;5;241m=[39m OptimizerNames[38;5;241m.[39mADAFACTOR
+[1;32m    874[0m [38;5;28;01mif[39;00m (
+[1;32m    875[0m     is_torch_available()
+[0;32m--> 876[0m     [38;5;129;01mand[39;00m ([38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mdevice[49m[38;5;241m.[39mtype [38;5;241m!=[39m [38;5;124m"[39m[38;5;124mcuda[39m[38;5;124m"[39m)
+[1;32m    877[0m     [38;5;129;01mand[39;00m [38;5;129;01mnot[39;00m ([38;5;28mself[39m[38;5;241m.[39mdevice[38;5;241m.[39mtype [38;5;241m==[39m [38;5;124m"[39m[38;5;124mxla[39m[38;5;124m"[39m [38;5;129;01mand[39;00m [38;5;124m"[39m[38;5;124mGPU_NUM_DEVICES[39m[38;5;124m"[39m [38;5;129;01min[39;00m os[38;5;241m.[39menviron)
+[1;32m    878[0m     [38;5;129;01mand[39;00m ([38;5;28mself[39m[38;5;241m.[39mfp16 [38;5;129;01mor[39;00m [38;5;28mself[39m[38;5;241m.[39mfp16_full_eval [38;5;129;01mor[39;00m [38;5;28mself[39m[38;5;241m.[39mbf16 [38;5;129;01mor[39;00m [38;5;28mself[39m[38;5;241m.[39mbf16_full_eval)
+[1;32m    879[0m ):
+[1;32m    880[0m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[1;32m    881[0m         [38;5;124m"[39m[38;5;124mMixed precision training with AMP or APEX (`--fp16` or `--bf16`) and half precision evaluation (`--fp16_full_eval` or `--bf16_full_eval`) can only be used on CUDA devices.[39m[38;5;124m"[39m
+[1;32m    882[0m     )
+[1;32m    884[0m [38;5;28;01mif[39;00m is_torch_available() [38;5;129;01mand[39;00m [38;5;28mself[39m[38;5;241m.[39mtf32 [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+
+File [0;32m~/miniforge3/envs/meta/lib/python3.9/site-packages/transformers/utils/import_utils.py:781[0m, in [0;36mtorch_required.<locals>.wrapper[0;34m(*args, **kwargs)[0m
+[1;32m    778[0m [38;5;129m@wraps[39m(func)
+[1;32m    779[0m [38;5;28;01mdef[39;00m [38;5;21mwrapper[39m([38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs):
+[1;32m    780[0m     [38;5;28;01mif[39;00m is_torch_available():
+[0;32m--> 781[0m         [38;5;28;01mreturn[39;00m [43mfunc[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m    782[0m     [38;5;28;01melse[39;00m:
+[1;32m    783[0m         [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mMethod `[39m[38;5;132;01m{[39;00mfunc[38;5;241m.[39m[38;5;18m__name__[39m[38;5;132;01m}[39;00m[38;5;124m` requires PyTorch.[39m[38;5;124m"[39m)
+
+File [0;32m~/miniforge3/envs/meta/lib/python3.9/site-packages/transformers/training_args.py:1110[0m, in [0;36mTrainingArguments.device[0;34m(self)[0m
+[1;32m   1104[0m [38;5;129m@property[39m
+[1;32m   1105[0m [38;5;129m@torch_required[39m
+[1;32m   1106[0m [38;5;28;01mdef[39;00m [38;5;21mdevice[39m([38;5;28mself[39m) [38;5;241m-[39m[38;5;241m>[39m [38;5;124m"[39m[38;5;124mtorch.device[39m[38;5;124m"[39m:
+[1;32m   1107[0m     [38;5;124;03m"""[39;00m
+[1;32m   1108[0m [38;5;124;03m    The device used by this process.[39;00m
+[1;32m   1109[0m [38;5;124;03m    """[39;00m
+[0;32m-> 1110[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_setup_devices[49m
+
+File [0;32m~/miniforge3/envs/meta/lib/python3.9/site-packages/transformers/utils/generic.py:48[0m, in [0;36mcached_property.__get__[0;34m(self, obj, objtype)[0m
+[1;32m     46[0m cached [38;5;241m=[39m [38;5;28mgetattr[39m(obj, attr, [38;5;28;01mNone[39;00m)
+[1;32m     47[0m [38;5;28;01mif[39;00m cached [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[0;32m---> 48[0m     cached [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mfget[49m[43m([49m[43mobj[49m[43m)[49m
+[1;32m     49[0m     [38;5;28msetattr[39m(obj, attr, cached)
+[1;32m     50[0m [38;5;28;01mreturn[39;00m cached
+
+File [0;32m~/miniforge3/envs/meta/lib/python3.9/site-packages/transformers/utils/import_utils.py:781[0m, in [0;36mtorch_required.<locals>.wrapper[0;34m(*args, **kwargs)[0m
+[1;32m    778[0m [38;5;129m@wraps[39m(func)
+[1;32m    779[0m [38;5;28;01mdef[39;00m [38;5;21mwrapper[39m([38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs):
+[1;32m    780[0m     [38;5;28;01mif[39;00m is_torch_available():
+[0;32m--> 781[0m         [38;5;28;01mreturn[39;00m [43mfunc[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m    782[0m     [38;5;28;01melse[39;00m:
+[1;32m    783[0m         [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mMethod `[39m[38;5;132;01m{[39;00mfunc[38;5;241m.[39m[38;5;18m__name__[39m[38;5;132;01m}[39;00m[38;5;124m` requires PyTorch.[39m[38;5;124m"[39m)
+
+File [0;32m~/miniforge3/envs/meta/lib/python3.9/site-packages/transformers/training_args.py:1035[0m, in [0;36mTrainingArguments._setup_devices[0;34m(self)[0m
+[1;32m   1031[0m [38;5;129m@cached_property[39m
+[1;32m   1032[0m [38;5;129m@torch_required[39m
+[1;32m   1033[0m [38;5;28;01mdef[39;00m [38;5;21m_setup_devices[39m([38;5;28mself[39m) [38;5;241m-[39m[38;5;241m>[39m [38;5;124m"[39m[38;5;124mtorch.device[39m[38;5;124m"[39m:
+[1;32m   1034[0m     logger[38;5;241m.[39minfo([38;5;124m"[39m[38;5;124mPyTorch: setting up devices[39m[38;5;124m"[39m)
+[0;32m-> 1035[0m     [38;5;28;01mif[39;00m [43mtorch[49m[38;5;241;43m.[39;49m[43mdistributed[49m[38;5;241;43m.[39;49m[43mis_initialized[49m() [38;5;129;01mand[39;00m [38;5;28mself[39m[38;5;241m.[39mlocal_rank [38;5;241m==[39m [38;5;241m-[39m[38;5;241m1[39m:
+[1;32m   1036[0m         logger[38;5;241m.[39mwarning(
+[1;32m   1037[0m             [38;5;124m"[39m[38;5;124mtorch.distributed process group is initialized, but local_rank == -1. [39m[38;5;124m"[39m
+[1;32m   1038[0m             [38;5;124m"[39m[38;5;124mIn order to use Torch DDP, launch your script with `python -m torch.distributed.launch[39m[38;5;124m"[39m
+[1;32m   1039[0m         )
+[1;32m   1040[0m     [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mno_cuda:
+
+[0;31mAttributeError[0m: module 'torch.distributed' has no attribute 'is_initialized'
+AttributeError: module 'torch.distributed' has no attribute 'is_initialized'
+
