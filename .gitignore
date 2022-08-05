@@ -161,3 +161,11 @@ cython_debug/
 
 *.pt
 *.png
+*.zip
+*.pth
+None/
+*.ckpt
+outputs/
+lightning_logs/
+*.csv
+wandb/
