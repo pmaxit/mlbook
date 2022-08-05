@@ -14,8 +14,3 @@ parts:
   - file: notebooks
     title: Example
   - file: markdown-notebooks
-  
-- caption: Kaggle
-  chapters:
-  - file: markdown
-    title: Disaster classification
